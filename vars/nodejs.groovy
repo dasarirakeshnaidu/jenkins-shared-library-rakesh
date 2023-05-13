@@ -5,15 +5,15 @@ def linkChecks(COMPONENT) {
                    # npm install jslint
                    # ls -ltr node_modules/jslint/bin/
                    # node_modules/jslint/bin/jslint.js server.js
-                   echo performing lint checks
-                   echo performing lint checks completed"
+                   echo performing lint checks for $(COMPONENT)
+                   echo performing lint checks completed for $(COMPONENT)
        '''           
 }
 
 // Call is the default function which will be called when you call the filename
 def call() {
     pipeline {
-        agents any
+        agent any
         stages {
             stage('Lint Checks') {
                 steps {
