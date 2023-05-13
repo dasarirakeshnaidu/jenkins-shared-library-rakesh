@@ -1,5 +1,7 @@
-def info(message) {
-       echo "INFO: ${message}"
+def info(message, URL) {
+       echo "INFO: ${message} ${URL}"
 }
 
-info("Hello")
+// info("Hello" , "library.google.com")
+
+// We can also pass more than 1 value
