@@ -16,7 +16,7 @@ def call() {
             SONAR = credentials('SONAR')
             SONAR_URL = "IP ADDRESS"
         }
-        
+
         stages {
             stage('Lint Checks') {
                 steps {
@@ -29,6 +29,7 @@ def call() {
             stage('Sonar Checks') {
                 steps {
                     script{
+                        env.ARGS="-Dsonar.sources=."
                         common.sonarChecks()
                     }
                 }
