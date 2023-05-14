@@ -23,6 +23,7 @@ def call() {
 
         environment {
             SONAR = credentials('SONAR')
+            SONAR_URL = "IP ADDRESS"
         }
 
         stages {

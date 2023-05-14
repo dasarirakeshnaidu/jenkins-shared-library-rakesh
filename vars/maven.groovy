@@ -12,6 +12,12 @@ def linkChecks(COMPONENT) {
 def call() {
     pipeline {
         agent any
+
+        environment {
+            SONAR = credentials('SONAR')
+            SONAR_URL = "IP ADDRESS"
+        }
+        
         stages {
             stage('Lint Checks') {
                 steps {
