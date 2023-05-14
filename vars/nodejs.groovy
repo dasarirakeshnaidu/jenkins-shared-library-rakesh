@@ -33,6 +33,21 @@ def call() {
                     }
                 }
             }
+
+            stage('Sonar Checks') {
+                steps {
+                    script{
+                        sonarChecks()
+                    }
+                }
+            }
+
+            stage('Performing npm install') {
+                steps {
+                     sh "echo HAI"
+                }
+            }
         }
+
     }
 }
