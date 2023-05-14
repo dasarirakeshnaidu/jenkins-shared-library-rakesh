@@ -10,10 +10,21 @@ def linkChecks(COMPONENT) {
        '''           
 }
 
+def sonarChecks() {
+    sh '''
+         sonar-scanner -Dsonae.host.url=http://IP:9000 -Dsonar.sources=. -Dsonar.projectKey=${COMPONENT} -Dsonar.login=${SONAR_USR} -Dsonar.password=${SONAR_PSW}
+        '''
+}
+
 // Call is the default function which will be called when you call the filename
 def call() {
     pipeline {
         agent any
+
+        environment {
+            SONAR = credentials('SONAR')
+        }
+
         stages {
             stage('Lint Checks') {
                 steps {
