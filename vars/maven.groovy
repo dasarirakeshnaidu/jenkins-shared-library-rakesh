@@ -17,7 +17,7 @@ def call() {
             SONAR = credentials('SONAR')
             SONAR_URL = "IP ADDRESS"
         }
-        
+
         stages {
             stage('Lint Checks') {
                 steps {
@@ -30,6 +30,8 @@ def call() {
             stage('Sonar Checks') {
                 steps {
                     script{
+                        sh "mvn clean compile"
+                        env.ARGS="-Dsonar.java.binaries=target/"
                         common.sonarChecks()
                     }
                 }
