@@ -37,7 +37,7 @@ def call() {
             stage('Sonar Checks') {
                 steps {
                     script{
-                        sonarChecks()
+                        common.sonarChecks()
                     }
                 }
             }
