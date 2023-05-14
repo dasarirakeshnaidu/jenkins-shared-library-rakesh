@@ -47,7 +47,7 @@ def call() {
                 }
                stage('Integration Testing') {
                     steps {
-                      // sh "mvn test"  
+                      // sh "mvn verify"  
                       sh "echo performing Integration Testing"
                     }
                 }

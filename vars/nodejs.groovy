@@ -60,7 +60,7 @@ def call() {
                 }
                stage('Integration Testing') {
                     steps {
-                      // sh "npm test"  
+                      // sh "npm verify"  
                       sh "echo performing Integration Testing"
                     }
                 }
