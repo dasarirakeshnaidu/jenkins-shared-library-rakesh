@@ -41,11 +41,13 @@ def call() {
             parallel {
                 stage('Unit Testing') {
                     steps {
+                      // sh "mvn test"
                       sh "echo performing Unit Testing"
                     }
                 }
                stage('Integration Testing') {
                     steps {
+                      // sh "mvn test"  
                       sh "echo performing Integration Testing"
                     }
                 }
