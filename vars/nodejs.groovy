@@ -12,7 +12,7 @@ def linkChecks(COMPONENT) {
 
 def sonarChecks() {
     sh '''
-         sonar-scanner -Dsonae.host.url=http://IP:9000 -Dsonar.sources=. -Dsonar.projectKey=${COMPONENT} -Dsonar.login=${SONAR_USR} -Dsonar.password=${SONAR_PSW}
+         sonar-scanner -Dsonar.host.url=http://IP:9000 -Dsonar.sources=. -Dsonar.projectKey=${COMPONENT} -Dsonar.login=${SONAR_USR} -Dsonar.password=${SONAR_PSW}
         '''
 }
 
