@@ -23,7 +23,9 @@ def call() {
 
         environment {
             SONAR = credentials('SONAR')
+            NEXUS = credentials('NEXUS')
             SONAR_URL = "IP ADDRESS"
+            NEXUS_URL = "IP ADDRESS"
         }
 
         stages {
@@ -79,6 +81,7 @@ def call() {
                 when {expression { env.TAG_NAME !=null } }
                 steps {
                 sh "echo Publishing the artifacts"
+                 sh "curl -f -v -u ${NEXUS_USR}:${NEXUS_PSW} --upload-file ${COMPONENT}-${TAG_NAME}.zip http://${NEXUS_URL}:8081/repository/${COMPONENT}/${COMPONENT}-${TAG_NAME}.zip"
                 }
             }
         }
