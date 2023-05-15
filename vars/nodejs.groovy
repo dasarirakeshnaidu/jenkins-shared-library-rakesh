@@ -68,8 +68,20 @@ def call() {
             } 
         }       
 
+            stage('Checking the Artifact Version') {
+            when { expression { env.TAG_NAME != null } }
+            steps {
+                script {
+                        env.UPLOAD_STATUS=sh(returnStdout: true, script: 'curl -L -s http://172.31.13.88:8081/service/rest/repository/browse/${COMPONENT} | grep ${COMPONENT}-${TAG_NAME}.zip || true')
+                        print UPLOAD_STATUS
+                    }
+                }
+            }
+
             stage('Prepare the artifacts') {
-                when {expression { env.TAG_NAME !=null } }
+                when {
+                    expression { env.TAG_NAME !=null }
+                    expression { env.UPLOAD_STATUS == "" } }
                 steps {
                        sh "npm install"
                        sh "echo Preparing the artifacts"
@@ -78,7 +90,9 @@ def call() {
             }
             
             stage( 'Publish the artifacts') {
-                when {expression { env.TAG_NAME !=null } }
+                when {
+                    expression { env.TAG_NAME !=null } 
+                    expression { env.UPLOAD_STATUS == "" }}
                 steps {
                 sh "echo Publishing the artifacts"
                  sh "curl -f -v -u ${NEXUS_USR}:${NEXUS_PSW} --upload-file ${COMPONENT}-${TAG_NAME}.zip http://${NEXUS_URL}:8081/repository/${COMPONENT}/${COMPONENT}-${TAG_NAME}.zip"
