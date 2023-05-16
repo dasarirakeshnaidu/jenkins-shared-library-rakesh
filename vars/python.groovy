@@ -7,6 +7,7 @@ def call() {
         env.ARGS="-Dsonar.sources=."
         common.sonarChecks()
         common.testCases()
+        common.artifacts()
     }
 }
 // Call is the default function which will be called when you call the filename
