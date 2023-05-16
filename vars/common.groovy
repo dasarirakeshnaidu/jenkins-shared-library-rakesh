@@ -7,3 +7,50 @@ def sonarChecks() {
           sh "echo Code Quality Analysis Completed"
     }
 }
+
+def testCases() {
+    stage('Test Cases') {
+        
+    }
+}
+
+def lintChecks() {
+    stage('Lint checks') {
+          if (env.APP_TYPE == "maven") {
+            sh '''
+                   echo Lint Checks for $(COMPONENT)
+                   echo installing jslint
+                   # mvn checkstyle:check
+                   echo performing lint checks for $(COMPONENT)
+                   echo performing lint checks completed for $(COMPONENT)
+             '''    
+          }
+         else if (env.APP_TYPE == "nodejs") {
+            sh '''
+                   echo Lint Checks for $(COMPONENT)
+                   echo installing jslint
+                   # npm install jslint
+                   # ls -ltr node_modules/jslint/bin/
+                   # node_modules/jslint/bin/jslint.js server.js
+                   echo performing lint checks for $(COMPONENT)
+                   echo performing lint checks completed for $(COMPONENT)
+            '''           
+         }
+         else if (env.APP_TYPE == "python") {
+            sh '''
+                   echo Lint Checks for $(COMPONENT)
+                   # pylint *.py
+                   echo performing lint checks for $(COMPONENT)
+                   echo performing lint checks completed for $(COMPONENT)
+             '''  
+         }
+         else {
+            sh '''
+                   echo Lint Checks for $(COMPONENT)
+                   echo performing lint checks for $(COMPONENT)
+                   echo performing lint checks completed for $(COMPONENT)
+            '''  
+         }
+    }
+}
+
